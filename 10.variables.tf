@@ -7,39 +7,39 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "subnet_cidr_1" {
-  description = "CIDR block for the first subnet"
-  type        = string
+variable "public_subnet_cidrs" {
+  description = "CIDR block for the public subnet"
+  type        = list(string)
 }
 
-variable "subnet_az_1" {
-  description = "Availability Zone for the first subnet"
-  type        = string
+variable "private_subnet_cidrs" {
+  description = "CIDR block for the private subnet"
+  type        = list(string)
 }
 
-variable "subnet_cidr_2" {
-  description = "CIDR block for the second subnet"
-  type        = string
+variable "azs" {
+  description = "Availability Zone for the subnet"
+  type        = list(string)
 }
 
-variable "subnet_az_2" {
-  description = "Availability Zone for the second subnet"
-  type        = string
+variable "inbound_ports" {
+  description = "List of ingress ports for security group rules"
+  type        = list(number)
 }
 
-variable "subnet_cidr_3" {
-  description = "CIDR block for the third subnet"
-  type        = string
+variable "outbound_ports" {
+  description = "List of egress ports for security group rules"
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+    })
+  )
 }
-
-variable "subnet_az_3" {
-  description = "Availability Zone for the third subnet"
-  type        = string
-}
-
 variable "imagename" {
   description = "AMI ID for the instance"
-  type        = string
+
 }
 
 variable "instancetype" {
@@ -52,8 +52,12 @@ variable "keyname" {
   type        = string
 }
 
-variable "security_group_name" {
-  description = "Name of the security group"
+variable "environment" {
+  description = "Environment for the deployment (e.g., dev, staging, prod)"
   type        = string
 }
 
+variable "region" {
+  description = "AWS region for the deployment"
+  type        = string
+}

@@ -1,29 +1,12 @@
-resource "aws_s3_bucket" "awsb66-bucket-111" {
-  bucket = "awsb66-bucket-111"
+resource "aws_s3_bucket" "awsb66-bucket-03" {
+  bucket = "awsb66-bucket-03"
   acl    = "private"
 
   tags = {
-    Name        = "awsb66-bucket-111"
-    Environment = "Dev"
+    Name = "awsb66-bucket-02"
   }
-}
-
-resource "aws_s3_bucket" "awsb66-bucket-222" {
-  bucket = "awsb66-bucket-222"
-  acl    = "private"
-
-  tags = {
-    Name        = "awsb66-bucket-222"
-    Environment = "Dev"
-  }
-}
-resource "aws_s3_bucket" "awsb66-bucket-333" {
-  bucket = "awsb66-bucket-333"
-  acl    = "private"
-
-  tags = {
-    Name        = "awsb66-bucket-333"
-    Environment = "Dev"
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
